@@ -2,7 +2,7 @@
 @section('content')
 <div class="row">
 
-    <h1>Panel principal</h1>
+    <h1>Listado de usuarios</h1>
 
 </div>
     
