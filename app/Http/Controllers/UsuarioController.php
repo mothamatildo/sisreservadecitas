@@ -11,4 +11,9 @@ class UsuarioController extends Controller
    $usuarios = User::all();
     return view('admin.usuarios.index', compact('usuarios'));
  }
+
+ public function create(){
+  return view ('admin.usuarios.create');
+ }
+ 
 }
