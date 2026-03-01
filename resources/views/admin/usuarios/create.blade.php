@@ -21,31 +21,46 @@
 
             <div class="card-body">
 
-                <form action="#" method="POST">
+                <form action="{{asset ('/admin/usuarios/create')}}" method="POST">
                     @csrf
 
                     <!-- Nombre -->
                     <div class="form-group">
                         <label>Nombre del usuario</label> <b>*</b>
-                        <input type="text" class="form-control" name="name">
+                        <input type="text" value="{{old('name')}}" class="form-control" name="name" required>
+                        @error('name')
+                        ><small style="color:red">{{$message}}</small>
+
+                            
+                        @enderror
                     </div>
 
                     <!-- Email -->
                     <div class="form-group">
                         <label>Email</label><b>*</b>
-                        <input type="email" class="form-control" name="email">
+                        <input type="email" value="{{old('email')}}" class="form-control" name="email" required>
+                                                @error('email')
+                        ><small style="color:red">{{$message}}</small>
+
+                            
+                        @enderror
                     </div>
 
                     <!-- Password -->
                     <div class="form-group">
                         <label>Password</label><b>*</b>
-                        <input type="password" class="form-control" name="password">
+                        <input type="password" class="form-control" name="password" required>
+                                                @error('password')
+                        ><small style="color:red">{{$message}}</small>
+
+                            
+                        @enderror
                     </div>
 
                     <!-- Confirmación -->
                     <div class="form-group">
                         <label>Password verificación</label><b>*</b>
-                        <input type="password" class="form-control" name="password_confirmation">
+                        <input type="password" class="form-control" name="password_confirmation" required>
                     </div>
 
                     <hr>

@@ -18,6 +18,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
    <!-- Iconos BootStrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+     <!-- SweetAlert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
 </head>
 <body class="hold-transition sidebar-mini">
@@ -116,6 +119,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </div>
     <!-- /.sidebar -->
   </aside>
+
+ @if( (($message = Session::get('mensaje')) && ($icono = Session::get('icono'))) )
+                   <script>
+                    Swal.fire({
+  position: "top-end",
+  icon: "{{$icono}}",
+  title: "{{$message}}",
+  showConfirmButton: false,
+  timer: 4500
+});
+                   </script>
+                @endif
+
+
 
 <div class="content-wrapper">
   <br>
