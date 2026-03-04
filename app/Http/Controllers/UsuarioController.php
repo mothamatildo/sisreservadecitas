@@ -35,4 +35,9 @@ class UsuarioController extends Controller
                          ->with('mensaje', 'Usuario creado correctamente')
                          ->with('icono', 'success');
     }
+
+    public function show($id){
+  $usuario = User::findOrFail($id);
+    return view ('admin.usuarios.show',compact('usuario'));
+    }
 }

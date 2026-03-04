@@ -42,7 +42,7 @@
     <td>{{$usuario->email}}</td> 
     <td style="text-align: center">
     <div class="btn-group" role="group" aria-label="Basic example">
-  <button type="button" class="btn btn-info btn-sm"><i class="bi bi-eye"></i></button>
+  <a href="{{asset('admin/usuarios/'.$usuario->id)}}" type="button" class="btn btn-info btn-sm"><i class="bi bi-eye"></i></a>
   <button type="button" class="btn btn-success btn-sm"><i class="bi bi-pencil"></i></button>
   <button type="button" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
 </div>
