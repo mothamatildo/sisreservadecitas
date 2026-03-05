@@ -40,4 +40,35 @@ class UsuarioController extends Controller
   $usuario = User::findOrFail($id);
     return view ('admin.usuarios.show',compact('usuario'));
     }
+
+    public function edit($id){
+     $usuario = User::findOrFail($id);
+    return view ('admin.usuarios.edit',compact('usuario'));
+            }
+
+public function update(Request $request, $id){
+    
+    $request->validate([
+        'name' => 'required|max:250',
+        'email' => 'required|max:250|unique:users,email,'.$id,
+        'password' => 'nullable|max:250|confirmed',
+    ]);
+
+    $usuario = User::findOrFail($id);
+
+    $usuario->name = $request->name;
+    $usuario->email = $request->email;
+
+    // Solo actualizar contraseña si se escribió una nueva
+    if($request->filled('password')){
+        $usuario->password = Hash::make($request->password);
+    }
+
+    $usuario->save();
+
+    return redirect()->route('admin.usuarios.index')
+                     ->with('mensaje', 'Usuario actualizado correctamente')
+                     ->with('icono', 'success');
+}
+
 }

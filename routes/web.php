@@ -46,3 +46,11 @@ Route::post('/admin/usuarios/create', [App\Http\Controllers\UsuarioController::c
 Route::get ('/admin/usuarios/{id}', [App\Http\Controllers\UsuarioController::class, 'show'])
 ->name('admin.usuarios.show')
 ->middleware ('auth');
+
+Route::get ('/admin/usuarios/{id}/edit', [App\Http\Controllers\UsuarioController::class, 'edit'])
+->name('admin.usuarios.edit')
+->middleware ('auth');
+
+Route::put ('/admin/usuarios/{id}', [App\Http\Controllers\UsuarioController::class, 'update'])
+->name('admin.usuarios.update')
+->middleware ('auth');
