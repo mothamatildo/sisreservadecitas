@@ -54,3 +54,7 @@ Route::get ('/admin/usuarios/{id}/edit', [App\Http\Controllers\UsuarioController
 Route::put ('/admin/usuarios/{id}', [App\Http\Controllers\UsuarioController::class, 'update'])
 ->name('admin.usuarios.update')
 ->middleware ('auth');
+
+Route::get ('/admin/usuarios/{id}/confirm-delete', [App\Http\Controllers\UsuarioController::class, 'confirmDelete'])
+->name('admin.usuarios.confirmDelete')
+->middleware ('auth');

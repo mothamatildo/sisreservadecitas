@@ -43,8 +43,8 @@
     <td style="text-align: center">
     <div class="btn-group" role="group" aria-label="Basic example">
   <a href="{{asset('admin/usuarios/'.$usuario->id)}}" type="button" class="btn btn-info btn-sm"><i class="bi bi-eye"></i></a>
-  <a href="{{asset('/admin/usuarios/'.$usuario->id.'/edit')}}" type="button" class="btn btn-success btn-sm"><i class="bi bi-pencil"></i></a>
-  <button type="button" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
+  <a href="{{asset('admin/usuarios/'.$usuario->id.'/edit')}}" type="button" class="btn btn-success btn-sm"><i class="bi bi-pencil"></i></a>
+  <a href="{{asset('admin/usuarios/'.$usuario->id.'/confirm-delete')}}" type="button" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></a>
 </div>
     </td>
 </tr> 

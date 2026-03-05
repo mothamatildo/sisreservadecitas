@@ -71,4 +71,10 @@ public function update(Request $request, $id){
                      ->with('icono', 'success');
 }
 
+public function confirmDelete ($id){
+        $usuario = User::findOrFail($id);
+    return view ('admin.usuarios.delete',compact('usuario'));
+
 }
+
+   }
