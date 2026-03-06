@@ -77,4 +77,13 @@ public function confirmDelete ($id){
 
 }
 
+public function destroy($id){
+    User::destroy($id);
+        return redirect()->route('admin.usuarios.index')
+                     ->with('mensaje', 'Usuario eliminado correctamente')
+                     ->with('icono', 'success');
+
+
+}
+
    }

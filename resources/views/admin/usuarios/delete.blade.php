@@ -21,8 +21,9 @@
 
             <div class="card-body">
 
-                <form action="{{asset ('/admin/usuarios/create')}}" method="POST">
-                    @csrf
+<form action="{{route('admin.usuarios.destroy',$usuario->id)}}" method="POST">
+    @csrf
+    @method('DELETE')
 
                     <!-- Nombre -->
                     <div class="form-group">
