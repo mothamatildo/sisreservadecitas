@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Contracts\View\View;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
     public function index (){
-        return view ('admin.index');
+        $total_usuarios = User::count();
+        return view ('admin.index',compact('total_usuarios'));
     }
     //
 }
