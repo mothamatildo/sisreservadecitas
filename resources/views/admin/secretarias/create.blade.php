@@ -21,7 +21,7 @@
 
             <div class="card-body">
 
-                <form action="{{asset ('/admin/usuarios/create')}}" method="POST">
+                <form action="{{asset ('/admin/secretarias/create')}}" method="POST">
                     @csrf
 
                     <!-- Nombre -->
@@ -149,7 +149,7 @@
                         <div class="col-md">
                             
                     <div class="form-group">
-                        <a href="{{ url('admin/usuarios') }}" class="btn btn-secondary">Cancelar</a>
+                        <a href="{{ url('admin/secretarias') }}" class="btn btn-secondary">Cancelar</a>
 
                         <button type="submit" class="btn btn-primary">
                             Registrar nuevo
