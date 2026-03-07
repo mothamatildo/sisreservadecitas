@@ -18,11 +18,11 @@ return new class extends Migration
             $table->string('apellidos', length:100);
             $table->string('cc',length:100)->unique();
             $table->string('celular', length:100);
-            $table->string('fecha nacimiento', length:100);
+            $table->date('fecha_nacimiento');
             $table->string('direccion', length:255);
 
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             
             $table->timestamps();
         });
