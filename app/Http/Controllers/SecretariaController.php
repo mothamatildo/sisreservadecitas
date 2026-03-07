@@ -12,7 +12,8 @@ class SecretariaController extends Controller
      */
     public function index()
     {
-        //
+        $secretarias = Secretaria::with('user')->get();
+       return view('admin.secretarias.index', compact('secretarias'));
     }
 
     /**
@@ -20,7 +21,7 @@ class SecretariaController extends Controller
      */
     public function create()
     {
-        //
+    return view('admin.secretarias.create');
     }
 
     /**

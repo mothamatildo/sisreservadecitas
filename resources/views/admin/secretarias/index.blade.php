@@ -10,7 +10,7 @@
   <div class="col-md-10">
             <div class="card card-outline card-primary">
               <dv class="card-header">
-                <h3 class="card-title">secretarias registrados</h3>
+                <h3 class="card-title">Secretarias registrados</h3>
              <div class="card-tools">
                   <a href="{{asset('admin/secretarias/create')}}" class="btn btn-primary">
                    Registrar nuevo
@@ -26,11 +26,11 @@
     <tr>
       <td style="..."><b>Nro</b></td>
       <td style="..."><b>Nombres</b></td>
-      <td style="text-aling: center"><b>Apellidos</b></td>
-            <td style="text-aling: center"><b>CC</b></td>
-                  <td style="text-aling: center"><b>Celular</b></td>
-                        <td style="text-aling: center"><b>Fecha de nacimiento</b></td>
-                              <td style="text-aling: center"><b>Dirección</b></td>
+      <td style="..."><b>Apellidos</b></td>
+      <td style="..."><b>CC</b></td>
+      <td style="..."><b>Celular</b></td>
+      <td style="..."><b>Fecha de nacimiento</b></td>
+      <td style="..."><b>Dirección</b></td>
       <td><b>Email</b></td>
       <td><b>Acciones</b></td>
     </tr>
@@ -39,17 +39,17 @@
   <tbody>
     <?php $contador = 1; ?>
 
-    @foreach ($usuarios as $usuario)
+    @foreach ($secretarias as $secretaria)
 
 <tr>
     <td>{{$contador++}}</td>
-    <td>{{$usuario->name}}</td>   
-    <td>{{$usuario->email}}</td> 
+    <td>{{$secretaria->nombres}}</td>   
+    <td>{{$secretaria->apellidos}}</td> 
     <td style="text-align: center">
     <div class="btn-group" role="group" aria-label="Basic example">
-  <a href="{{asset('admin/usuarios/'.$usuario->id)}}" type="button" class="btn btn-info btn-sm"><i class="bi bi-eye"></i></a>
-  <a href="{{asset('admin/usuarios/'.$usuario->id.'/edit')}}" type="button" class="btn btn-success btn-sm"><i class="bi bi-pencil"></i></a>
-  <a href="{{asset('admin/usuarios/'.$usuario->id.'/confirm-delete')}}" type="button" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></a>
+  <a href="{{asset('admin/secretarias/'.$secretaria->id)}}" type="button" class="btn btn-info btn-sm"><i class="bi bi-eye"></i></a>
+  <a href="{{asset('admin/secretarias/'.$secretaria->id.'/edit')}}" type="button" class="btn btn-success btn-sm"><i class="bi bi-pencil"></i></a>
+  <a href="{{asset('admin/secretarias/'.$secretaria->id.'/confirm-delete')}}" type="button" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></a>
 </div>
     </td>
 </tr> 
