@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SecretariaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,14 +68,18 @@ Route::delete ('/admin/usuarios/{id}', [App\Http\Controllers\UsuarioController::
 
 // RUTAS PARA EL ADMIN - SECRETARIAS
 
-Route::get('/admin/secretarias', [App\Http\Controllers\SecretariaController::class, 'index'])
+Route::get('/admin/secretarias', [SecretariaController::class, 'index'])
 ->name('admin.secretarias.index')
-->middleware ('auth');
+->middleware('auth');
 
-Route::get('/admin/secretarias/create', [App\Http\Controllers\SecretariaController::class, 'create'])
+Route::get('/admin/secretarias/create', [SecretariaController::class, 'create'])
 ->name('admin.secretarias.create')
-->middleware ('auth');
+->middleware('auth');
 
-Route::post('/admin/secretarias/create', [App\Http\Controllers\SecretariaController::class, 'store'])
+Route::post('/admin/secretarias', [SecretariaController::class, 'store'])
 ->name('admin.secretarias.store')
-->middleware ('auth');
+->middleware('auth');
+
+Route::get('/admin/secretarias/{id}', [SecretariaController::class, 'show'])
+->name('admin.secretarias.show')
+->middleware('auth');

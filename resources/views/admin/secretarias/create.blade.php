@@ -21,7 +21,7 @@
 
             <div class="card-body">
 
-                <form action="{{asset ('/admin/secretarias/create')}}" method="POST">
+<form action="{{url('/admin/secretarias')}}" method="POST">
                     @csrf
 
                     <!-- Nombre -->
@@ -31,7 +31,7 @@
                         <label>Nombres</label> <b>*</b>
                         <input type="text" value="{{old('nombres')}}" class="form-control" name="nombres" required>
                         @error('nombres')
-                        ><small style="color:red">{{$message}}</small>
+                        <small style="color:red">{{$message}}</small>
 
                             
                         @enderror
@@ -43,7 +43,7 @@
                         <label>Apellidos</label> <b>*</b>
                         <input type="text" value="{{old('apellidos')}}" class="form-control" name="apellidos" required>
                         @error('apellidos')
-                        ><small style="color:red">{{$message}}</small>
+                        <small style="color:red">{{$message}}</small>
 
                             
                         @enderror
@@ -52,9 +52,9 @@
                                                     <div class="col-md-3">
                                                 <div class="form-group">
                         <label>CC</label> <b>*</b>
-                        <input type="text" value="{{old('nombres')}}" class="form-control" name="cc" required>
+                        <input type="text" value="{{old('cc')}}" class="form-control" name="cc" required>
                         @error('cc')
-                        ><small style="color:red">{{$message}}</small>
+                        <small style="color:red">{{$message}}</small>
 
                             
                         @enderror
@@ -66,7 +66,7 @@
                         <label>Celular</label> <b>*</b>
                         <input type="text" value="{{old('celular')}}" class="form-control" name="celular" required>
                         @error('celular')
-                        ><small style="color:red">{{$message}}</small>
+                        <small style="color:red">{{$message}}</small>
 
                             
                         @enderror
@@ -86,7 +86,7 @@
                         <label>Fecha nacimiento</label> <b>*</b>
                         <input type="date" value="{{old('fecha_nacimiento')}}" class="form-control" name="fecha_nacimiento" required>
                         @error('fecha_nacimiento')
-                        ><small style="color:red">{{$message}}</small>
+                        <small style="color:red">{{$message}}</small>
 
                             
                         @enderror
@@ -95,9 +95,9 @@
                                                        <div class="col-md-9">
                                                 <div class="form-group">
                         <label>Dirección</label> <b>*</b>
-                        <input type="address" value="{{old('direccion')}}" class="form-control" name="direccion" required>
+                        <input type="text" value="{{old('direccion')}}" class="form-control" name="direccion" required>
                         @error('direccion')
-                        ><small style="color:red">{{$message}}</small>
+                        <small style="color:red">{{$message}}</small>
 
                             
                         @enderror
@@ -110,9 +110,9 @@
                             <!-- Email -->
                     <div class="form-group">
                         <label>Email</label><b>*</b>
-                        <input type="email" class="form-control" name="email" required>
+                        <input type="email" value="{{old('email')}}" class="form-control" name="email" required>
                                                 @error('email')
-                        ><small style="color:red">{{$message}}</small>
+                        <small style="color:red">{{$message}}</small>
 
                             
                         @enderror
@@ -124,7 +124,7 @@
                         <label>Password</label><b>*</b>
                         <input type="password" class="form-control" name="password" required>
                                                 @error('password')
-                        ><small style="color:red">{{$message}}</small>
+                        <small style="color:red">{{$message}}</small>
 
                             
                         @enderror

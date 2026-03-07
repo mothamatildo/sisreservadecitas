@@ -72,9 +72,10 @@ class SecretariaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Secretaria $secretaria)
+    public function show($id)
     {
-        //
+        $secretaria = Secretaria::with('user')->findOrFail($id); 
+        return view('admin.secretarias.show', compact('secretaria'));
     }
 
     /**
