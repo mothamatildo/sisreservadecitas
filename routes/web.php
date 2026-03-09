@@ -83,3 +83,11 @@ Route::post('/admin/secretarias', [SecretariaController::class, 'store'])
 Route::get('/admin/secretarias/{id}', [SecretariaController::class, 'show'])
 ->name('admin.secretarias.show')
 ->middleware('auth');
+
+Route::get('/admin/secretarias/{id}/edit', [SecretariaController::class, 'edit'])
+->name('admin.secretarias.edit')
+->middleware('auth');
+
+Route::put('/admin/secretarias/{id}', [SecretariaController::class, 'update'])
+->name('admin.secretarias.update')
+->middleware('auth');

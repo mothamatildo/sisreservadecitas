@@ -6,6 +6,7 @@ use App\Models\Secretaria;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 
 class SecretariaController extends Controller
 {
@@ -81,19 +82,59 @@ class SecretariaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Secretaria $secretaria)
+    public function edit($id)
     {
-        //
+        $secretaria = Secretaria::with('user')->findOrFail($id); 
+        return view('admin.secretarias.edit', compact('secretaria')); 
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Secretaria $secretaria)
-    {
-        //
+ public function update(Request $request, $id)
+{
+    $secretaria = Secretaria::with('user')->findOrFail($id);
+
+$request->validate([
+    'nombres'=> 'required',
+    'apellidos'=> 'required',
+    'cc'=> 'required|unique:secretarias,cc,' .$secretaria->id,
+    'celular'=> 'required',
+    'fecha_nacimiento'=> 'required',
+    'direccion'=> 'required',
+
+'email' => [
+    'required',
+    'max:250',
+    Rule::unique('users', 'email')->ignore($secretaria->user_id),
+],
+
+    'password'=> 'nullable|max:250|confirmed',
+]);
+
+    $secretaria->update([
+        'nombres'=>$request->nombres,
+        'apellidos'=>$request->apellidos,
+        'cc'=>$request->cc,
+        'celular'=>$request->celular,
+        'fecha_nacimiento'=>$request->fecha_nacimiento,
+        'direccion'=>$request->direccion
+    ]);
+
+    $usuario = User::find($secretaria->user->id);
+    $usuario->name = $request->nombres;
+    $usuario->email = $request->email;
+
+    if($request->filled('password')){
+        $usuario->password = Hash::make($request->password);
     }
 
+    $usuario->save();
+
+    return redirect()->route('admin.secretarias.index')
+        ->with('mensaje','Se actualizó la secretaria correctamente')
+        ->with('icono','success');
+}   
     /**
      * Remove the specified resource from storage.
      */
