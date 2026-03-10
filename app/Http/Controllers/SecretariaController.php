@@ -138,8 +138,31 @@ $request->validate([
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Secretaria $secretaria)
+
+    public function confirmDelete($id){
+
+            $secretaria = Secretaria::with('user')->findOrFail($id); 
+        return view('admin.secretarias.delete', compact('secretaria'));
+
+    }
+
+
+
+    public function destroy($id)
     {
-        //
+     $secretaria = Secretaria::find($id);
+
+    //Eliminar al usuario asociado
+    $user = $secretaria->user;
+    $user->delete();
+    
+    //Elimanar a la secretaria 
+    $secretaria->delete();
+        return redirect()->route('admin.secretarias.index')
+        ->with('mensaje','Se elimino la secretaria correctamente')
+        ->with('icono','success');
+
+
+
     }
 }
