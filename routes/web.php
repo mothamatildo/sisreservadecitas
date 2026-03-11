@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PacienteController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SecretariaController;
@@ -98,5 +99,39 @@ Route::get ('/admin/secretarias/{id}/confirm-delete', [App\Http\Controllers\Secr
 
 Route::delete ('/admin/secretarias/{id}', [App\Http\Controllers\SecretariaController::class, 'destroy'])
 ->name('admin.secretarias.destroy')
+->middleware ('auth');
+
+// RUTAS PARA EL ADMIN - PACIENTES
+
+Route::get('/admin/pacientes', [PacienteController::class, 'index'])
+->name('admin.pacientes.index')
+->middleware('auth');
+
+Route::get('/admin/pacientes/create', [PacienteController::class, 'create'])
+->name('admin.pacientes.create')
+->middleware('auth');
+
+Route::post('/admin/pacientes', [PacienteController::class, 'store'])
+->name('admin.pacientes.store')
+->middleware('auth');
+
+Route::get('/admin/pacientes/{id}', [PacienteController::class, 'show'])
+->name('admin.pacientes.show')
+->middleware('auth');
+
+Route::get('/admin/pacientes/{id}/edit', [PacienteController::class, 'edit'])
+->name('admin.pacientes.edit')
+->middleware('auth');
+
+Route::put('/admin/pacientes/{id}', [PacienteController::class, 'update'])
+->name('admin.pacientes.update')
+->middleware('auth');
+
+Route::get ('/admin/pacientes/{id}/confirm-delete', [App\Http\Controllers\SecretariaController::class, 'confirmDelete'])
+->name('admin.pacientes.confirmDelete')
+->middleware ('auth');
+
+Route::delete ('/admin/pacientes/{id}', [App\Http\Controllers\SecretariaController::class, 'destroy'])
+->name('admin.pacientes.destroy')
 ->middleware ('auth');
 
