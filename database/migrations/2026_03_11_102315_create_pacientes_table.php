@@ -13,7 +13,23 @@ return new class extends Migration
     {
         Schema::create('pacientes', function (Blueprint $table) {
             $table->id();
+
+             $table->string('nombres', length:100);
+            $table->string('apellidos', length:100);
+            $table->string('cc',length:100)->unique();
+            $table->string('nro_seguro',length:100)->unique();
+            $table->string('celular', length:100);
+            $table->date('fecha_nacimiento');
+            $table->string('genero', length:100);
+            $table->string('direccion', length:255);
+            $table->string('correo',length:100)->unique();
+            $table->string('grupo_sanguineo', length:255);
+            $table->string('alergias', length:255);
+            $table->string('contacto_emergencia', length:255);
+            $table->string('observaciones', length:255);
             $table->timestamps();
+
+
         });
     }
 
