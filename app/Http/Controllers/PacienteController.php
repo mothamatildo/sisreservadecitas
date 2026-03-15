@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Paciente;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PacienteController extends Controller
 {
@@ -12,7 +13,8 @@ class PacienteController extends Controller
      */
     public function index()
     {
-        //
+         $pacientes = Paciente::all();
+        return view('admin.pacientes.index', compact('pacientes'));
     }
 
     /**
@@ -20,7 +22,7 @@ class PacienteController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.pacientes.create');
     }
 
     /**
@@ -28,7 +30,8 @@ class PacienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $datos = request()->all();
+        return response()->json($datos);
     }
 
     /**

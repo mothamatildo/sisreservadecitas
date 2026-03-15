@@ -21,7 +21,7 @@
 
             <div class="card-body">
 
-                <form action="{{asset ('/admin/usuarios/create')}}" method="POST">
+            <form action="{{asset ('/admin/usuarios/create')}}" method="POST">
                     @csrf
 
                     <!-- Nombre -->

@@ -36,5 +36,9 @@ class DatabaseSeeder extends Seeder
             'email' => 'paciente@admin.com',
             'password' => Hash::make('12345678'),
         ]);
+
+        $this->call([
+            PacienteSeeder::class,
+        ]);
     }
 }
