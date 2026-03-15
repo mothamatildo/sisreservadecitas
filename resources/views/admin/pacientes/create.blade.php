@@ -149,7 +149,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                         <label>Dirección</label> <b>*</b>
-                        <input type="address" value="{{old('direccion')}}" class="form-control" name="direccion" required>
+                        <input type="text" value="{{old('direccion')}}" class="form-control" name="direccion" required>
                         @error('direccion')
                         ><small style="color:red">{{$message}}</small>
 
@@ -189,8 +189,8 @@
                     <div class="col-md-3">
                                             <div class="form-group">
                         <label>Contacto de emergencia</label> <b>*</b>
-                        <input type="number" value="{{old('celular')}}" class="form-control" name="celular" required>
-                        @error('celular')
+                        <input type="number" value="{{old('contacto_emergencia')}}" class="form-control" name="contacto_emergencia" required>
+                        @error('contacto_emergencia')
                         ><small style="color:red">{{$message}}</small>
 
                             

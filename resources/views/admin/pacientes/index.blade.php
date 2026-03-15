@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('content')
+
 <div class="row">
      <h1>Listado de pacientes</h1>
 
@@ -9,7 +10,7 @@
 
   <div class="col-md-12">
             <div class="card card-outline card-primary">
-              <dv class="card-header">
+              <div class="card-header">
                 <h3 class="card-title">Pacientes registrados</h3>
              <div class="card-tools">
                   <a href="{{asset('admin/pacientes/create')}}" class="btn btn-primary">
@@ -17,7 +18,7 @@
                   </a>
                 </div>
                 <!-- /.card-tools -->
-              </dv>
+              </div>
               <!-- /.card-header -->
               <div class="card-body">
                

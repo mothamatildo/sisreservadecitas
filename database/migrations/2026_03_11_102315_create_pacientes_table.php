@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('alergias', length:255);
             $table->string('contacto_emergencia', length:255);
             $table->string('observaciones', length:255)->nullable();
+            
             $table->timestamps();
 
 
