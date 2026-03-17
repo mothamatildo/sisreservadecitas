@@ -65,20 +65,22 @@ class PacienteController extends Controller
         ->with('mensaje', 'Paciente registrado correctamente')
         ->with('icono', 'success');
 }
-    /**
+    /**git
      * Display the specified resource.
      */
-    public function show(Paciente $paciente)
+    public function show($id)
     {
-        //
+        $paciente = Paciente::findOrFail($id);
+        return view('admin.pacientes.show',compact('paciente'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Paciente $paciente)
+    public function edit($id)
     {
-        //
+        $paciente = Paciente::findOrFail($id);
+        return view('admin.pacientes.edit',compact('paciente'));
     }
 
     /**
