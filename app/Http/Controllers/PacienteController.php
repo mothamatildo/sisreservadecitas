@@ -86,16 +86,64 @@ class PacienteController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Paciente $paciente)
+    public function update(Request $request, $id)
     {
-        //
+       $paciente = Paciente::find($id);
+
+$request->validate([
+    'nombres'=> 'required',
+    'apellidos'=> 'required',
+    'cc'=> 'required|unique:pacientes,cc,' . $paciente->id,
+    'nro_seguro'=> 'required|unique:pacientes,nro_seguro,' . $paciente->id,
+    'celular'=> 'required',
+    'fecha_nacimiento'=> 'required',
+    'genero'=> 'required',
+    'direccion'=> 'required',
+    'correo'=> 'required|max:250|unique:pacientes,correo,' . $paciente->id,
+    'grupo_sanguineo'=> 'required',
+    'alergias'=> 'required',
+    'contacto_emergencia'=> 'required',
+]);
+$paciente->nombres = $request->nombres;
+    $paciente->apellidos = $request->apellidos;
+    $paciente->cc = $request->cc;
+    $paciente->nro_seguro = $request->nro_seguro;
+    $paciente->celular = $request->celular;
+    $paciente->fecha_nacimiento = $request->fecha_nacimiento;
+    $paciente->genero = $request->genero;
+    $paciente->direccion = $request->direccion;
+    $paciente->correo = $request->correo;
+    $paciente->grupo_sanguineo = $request->grupo_sanguineo;
+    $paciente->alergias = $request->alergias;
+    $paciente->contacto_emergencia = $request->contacto_emergencia;
+    $paciente->observaciones = $request->observaciones;
+
+    $paciente->save();
+
+    return redirect()->route('admin.pacientes.index')
+        ->with('mensaje', 'Se actualizo paciente registrado correctamente')
+        ->with('icono', 'success');
+
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Paciente $paciente)
-    {
-        //
-    }
+
+public function confirmDelete($id)
+{
+    $paciente = Paciente::findOrFail($id);
+    return view('admin.pacientes.delete', compact('paciente'));
+}
+
+public function destroy($id)
+{
+    $paciente = Paciente::findOrFail($id);
+    $paciente->delete();
+
+    return redirect()->route('admin.pacientes.index')
+        ->with('mensaje', 'Paciente eliminado correctamente')
+        ->with('icono', 'success');
+}
 }

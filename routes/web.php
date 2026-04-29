@@ -127,11 +127,45 @@ Route::put('/admin/pacientes/{id}', [PacienteController::class, 'update'])
 ->name('admin.pacientes.update')
 ->middleware('auth');
 
-Route::get ('/admin/pacientes/{id}/confirm-delete', [App\Http\Controllers\SecretariaController::class, 'confirmDelete'])
-->name('admin.pacientes.confirmDelete')
-->middleware ('auth');
+Route::get('/admin/pacientes/{id}/confirm-delete', [PacienteController::class, 'confirmDelete'])
+    ->name('admin.pacientes.confirmDelete')
+    ->middleware('auth');
 
-Route::delete ('/admin/pacientes/{id}', [App\Http\Controllers\SecretariaController::class, 'destroy'])
-->name('admin.pacientes.destroy')
-->middleware ('auth');
+Route::delete('/admin/pacientes/{id}', [PacienteController::class, 'destroy'])
+    ->name('admin.pacientes.destroy')
+    ->middleware('auth');
 
+
+// RUTAS PARA EL ADMIN - CONSULTORIOS
+
+Route::get('/admin/consultorios', [ConsultorioController::class, 'index'])
+->name('admin.consultorios.index')
+->middleware('auth');
+
+Route::get('/admin/consultorios/create', [ConsultorioController::class, 'create'])
+->name('admin.colsutorios.create')
+->middleware('auth');
+
+Route::post('/admin/consultorios', [ConsultorioController::class, 'store'])
+->name('admin.consultorios.store')
+->middleware('auth');
+
+Route::get('/admin/consultorios/{id}', [ConsultorioController::class, 'show'])
+->name('admin.consultorios.show')
+->middleware('auth');
+
+Route::get('/admin/consultorios/{id}/edit', [ConsultorioController::class, 'edit'])
+->name('admin.consultorios.edit')
+->middleware('auth');
+
+Route::put('/admin/consultorios/{id}', [ConsultorioController::class, 'update'])
+->name('admin.consultorios.update')
+->middleware('auth');
+
+Route::get('/admin/consultorios/{id}/confirm-delete', [ConsultorioController::class, 'confirmDelete'])
+    ->name('admin.consultorios.confirmDelete')
+    ->middleware('auth');
+
+Route::delete('/admin/consultorios/{id}', [ConsultorioController::class, 'destroy'])
+    ->name('admin.consultorios.destroy')
+    ->middleware('auth');
