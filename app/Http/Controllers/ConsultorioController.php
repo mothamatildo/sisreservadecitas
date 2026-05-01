@@ -60,17 +60,33 @@ class ConsultorioController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Consultorio $consultorio)
+    public function edit ($id)
     {
-        //
+        $consultorio = Consultorio::findOrFail($id);
+        return view('admin.consultorios.edit', compact('consultorio'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Consultorio $consultorio)
+    public function update(Request $request, $id)
     {
-        //
+                        $request->validate([
+            'nombre'=> 'required',
+            'ubicacion'=> 'required',
+            'capacidad'=> 'required',
+            'telefono'=> 'required',
+            'especialidad'=> 'required',
+            'estado'=> 'required',
+            ]);
+
+            $consultorio = Consultorio::find($id);
+            $consultorio->update($request->all());
+
+                                return redirect()->route('admin.consultorios.index')
+                         ->with('mensaje', 'Se actualizó el consultorio correctamente')
+                         ->with('icono', 'success');
+
     }
 
     /**
