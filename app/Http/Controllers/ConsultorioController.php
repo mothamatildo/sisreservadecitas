@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Consultorio;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class ConsultorioController extends Controller
 {
@@ -21,7 +22,7 @@ class ConsultorioController extends Controller
      */
     public function create()
     {
-        //
+        return view ('admin.consultorios.create');
     }
 
     /**
@@ -29,7 +30,25 @@ class ConsultorioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+                $request->validate([
+            'nombre'=> 'required',
+            'ubicacion'=> 'required',
+            'capacidad'=> 'required',
+            'telefono'=> 'required',
+            'especialidad'=> 'required',
+            'estado'=> 'required',
+            ]);
+
+            Consultorio::create($request->all());
+
+                    return redirect()->route('admin.consultorios.index')
+                         ->with('mensaje', 'Consultorio creado correctamente')
+                         ->with('icono', 'success');
+
+
+
+
+
     }
 
     /**
