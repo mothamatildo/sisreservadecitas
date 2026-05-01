@@ -12,7 +12,8 @@ class ConsultorioController extends Controller
      */
     public function index()
     {
-        //
+     $consultorios = Consultorio::all();
+     return view('admin.consultorios.index',compact('consultorios'));
     }
 
     /**

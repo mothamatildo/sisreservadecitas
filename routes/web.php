@@ -4,6 +4,7 @@ use App\Http\Controllers\PacienteController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SecretariaController;
+use App\Http\Controllers\ConsultorioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -143,7 +144,7 @@ Route::get('/admin/consultorios', [ConsultorioController::class, 'index'])
 ->middleware('auth');
 
 Route::get('/admin/consultorios/create', [ConsultorioController::class, 'create'])
-->name('admin.colsutorios.create')
+->name('admin.consultorios.create')
 ->middleware('auth');
 
 Route::post('/admin/consultorios', [ConsultorioController::class, 'store'])
