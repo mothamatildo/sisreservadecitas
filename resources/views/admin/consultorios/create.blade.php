@@ -111,7 +111,7 @@
                     <hr>
 
                     <div class="form-group">
-                        <a href="{{ url('admin/pacientes') }}" class="btn btn-secondary">
+                        <a href="{{ url('admin/consultorios') }}" class="btn btn-secondary">
                             Cancelar
                         </a>
 

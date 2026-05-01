@@ -46,17 +46,15 @@ class ConsultorioController extends Controller
                          ->with('icono', 'success');
 
 
-
-
-
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Consultorio $consultorio)
+    public function show($id)
     {
-        //
+        $consultorio = Consultorio::findOrFail($id);
+        return view('admin.consultorios.show', compact('consultorio'));
     }
 
     /**
