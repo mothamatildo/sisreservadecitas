@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SecretariaController;
 use App\Http\Controllers\ConsultorioController;
+use App\Http\Controllers\DoctorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -170,3 +171,38 @@ Route::get('/admin/consultorios/{id}/confirm-delete', [ConsultorioController::cl
 Route::delete('/admin/consultorios/{id}', [ConsultorioController::class, 'destroy'])
     ->name('admin.consultorios.destroy')
     ->middleware('auth');
+
+
+// RUTAS PARA EL ADMIN - DOCTORES //
+
+Route::get('/admin/doctores', [DoctorController::class, 'index'])
+->name('admin.doctores.index')
+->middleware('auth');
+
+Route::get('/admin/doctores/create', [DoctorController::class, 'create'])
+->name('admin.doctores.create')
+->middleware('auth');
+
+Route::post('/admin/doctores', [DoctorController::class, 'store'])
+->name('admin.doctores.store')
+->middleware('auth');
+
+Route::get('/admin/doctores/{id}', [DoctorController::class, 'show'])
+->name('admin.doctores.show')
+->middleware('auth');
+
+Route::get('/admin/doctores/{id}/edit', [DoctorController::class, 'edit'])
+->name('admin.doctores.edit')
+->middleware('auth');
+
+Route::put('/admin/doctores/{id}', [DoctorController::class, 'update'])
+->name('admin.doctores.update')
+->middleware('auth');
+
+Route::get('/admin/doctores/{id}/confirm-delete', [DoctorController::class, 'confirmDelete'])
+    ->name('admin.doctores.confirmDelete')
+    ->middleware('auth');
+
+Route::delete('/admin/doctores/{id}', [DoctorController::class, 'destroy'])
+    ->name('admin.doctores.destroy')
+    ->middleware('auth');    
