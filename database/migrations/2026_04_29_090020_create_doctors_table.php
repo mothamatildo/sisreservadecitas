@@ -6,9 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('doctors', function (Blueprint $table) {
@@ -19,18 +16,24 @@ return new class extends Migration
             $table->string('licencia_medica');
             $table->string('especialidad');
 
+            // Relación con usuarios
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')
+                  ->references('id')
+                  ->on('users')
+                  ->onDelete('cascade');
 
-             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            
+            // 🔥 Relación con consultorios (LO QUE TE FALTABA)
+            $table->unsignedBigInteger('consultorio_id');
+            $table->foreign('consultorio_id')
+                  ->references('id')
+                  ->on('consultorios')
+                  ->onDelete('cascade');
 
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('doctors');

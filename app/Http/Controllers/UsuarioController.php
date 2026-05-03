@@ -19,7 +19,7 @@ class UsuarioController extends Controller
  
     public function store (Request $request ){
 
-        $request->validate([
+      $request->validate([
             'name'=>'required|max:250',
             'email'=>'required|max:250|unique:users',
             'password'=>'required|max:250|confirmed',

@@ -18,7 +18,8 @@ class Doctor extends Model
         'telefono',
         'licencia_medica',
         'especialidad',
-        'user_id'
+        'user_id',
+        'consultorio_id'
     ];
 
     public function consultorio (){
