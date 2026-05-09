@@ -42,7 +42,7 @@
     @foreach ($doctores as $doctore)
 <tr>
     <td>{{$contador++}}</td>
-    <td>{{$doctore->nombre ." ".$doctore->apellidos}}</td>   
+    <td>{{$doctore->nombres ." ".$doctore->apellidos}}</td>   
     <td>{{$doctore->telefono}}</td> 
     <td>{{$doctore->licencia_medica}}</td> 
     <td>{{$doctore->especialidad}}</td>
@@ -80,10 +80,10 @@ $(function () {
         "pageLength": 5,
         "language": {
             "emptyTable": "No hay información",
-            "info": "Mostrando _START_ a _END_ de _TOTAL_ Consultorios",
-            "infoEmpty": "Mostrando 0 a 0 de 0 Consultorios",
-            "infoFiltered": "(Filtrado de _MAX_ total Consultorios)",
-            "lengthMenu": "Mostrar _MENU_ Consultorios",
+            "info": "Mostrando _START_ a _END_ de _TOTAL_ Doctores",
+            "infoEmpty": "Mostrando 0 a 0 de 0 Doctores",
+            "infoFiltered": "(Filtrado de _MAX_ total Doctores)",
+            "lengthMenu": "Mostrar _MENU_ Doctores",
             "search": "Buscador:",
             "zeroRecords": "Sin resultados encontrados",
             "paginate": {
