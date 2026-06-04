@@ -128,4 +128,23 @@ public function update(Request $request, $id)
         ->with('mensaje', 'Se actualizó el doctor correctamente')
         ->with('icono', 'success');
 }
+public function confirmDelete($id){
+    $doctor = Doctor::findOrFail ($id);
+    return view('admin.doctores.delete', compact('doctor'));
+    
 }
+public function destroy ($id)
+{
+     $doctor = Doctor::find($id);
+
+    //Eliminar al usuario asociado
+    $user = $doctor->user;
+    $user->delete();
+    
+    //Elimanar al doctor 
+    $doctor->delete();
+        return redirect()->route('admin.doctores.index')
+        ->with('mensaje','Se elimino al doctor correctamente')
+        ->with('icono','success');
+        }
+ }        

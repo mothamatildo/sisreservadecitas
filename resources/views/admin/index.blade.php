@@ -56,7 +56,7 @@
 
           <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-warning">
+            <div class="small-box bg-info">
               <div class="inner">
                 <h3>{{$total_consultorios}}</h3>
                 <p>Consultorios</p>
@@ -65,6 +65,21 @@
                 <i class="ion fas bi bi-building-add"></i>
               </div>
               <a href="{{ url('admin/consultorios')}}" class="small-box-footer">Más información <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+        
+          
+                    <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-danger">
+              <div class="inner">
+                <h3>{{$total_doctores}}</h3>
+                <p>Doctores</p>
+              </div>
+              <div class="icon">
+                <i class="ion fas bi bi-person-lines-fill"></i>
+              </div>
+              <a href="{{ url('admin/doctores')}}" class="small-box-footer">Más información <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
 
