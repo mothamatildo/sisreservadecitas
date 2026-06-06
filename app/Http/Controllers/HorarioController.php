@@ -25,13 +25,31 @@ class HorarioController extends Controller
 
     public function store(Request $request)
     {
-        //
+    
+            $request->validate([
+            'dia'=> 'required',
+            'hora_inicio'=> 'required',
+            'hora_fin'=> 'required',
+
+        ]);
+    
+        Horario::create($request->all());
+
+                        return redirect()->route('admin.horarios.index')
+                         ->with('mensaje', 'Horario creado correctamente')
+                         ->with('icono', 'success');
+
+
     }
 
-    public function show(Horario $horario)
-    {
-        //
-    }
+public function show($id)
+{
+    $horario = Horario::find($id);
+
+    return view('admin.horarios.show', compact('horario'));
+}
+
+
 
     public function edit(Horario $horario)
     {

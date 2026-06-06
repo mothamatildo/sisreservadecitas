@@ -27,12 +27,12 @@
   <thead style="background-color:cornflowerblue">
     <tr>
       <td><b>Nro</b></td>
-      <td><b>Consultorio</b></td>
-      <td style="text-align:center"><b>Ubicación</b></td>
-      <td style="text-align:center"><b>Capacidad</b></td>
-      <td style="text-align:center"><b>Telefono</b></td>
+      <td><b>Doctor</b></td>
       <td style="text-align:center"><b>Especialidad</b></td>
-      <td style="text-align:center"><b>Estado</b></td>
+      <td style="text-align:center"><b>Consultorio</b></td>
+      <td style="text-align:center"><b>Dia de atención</b></td>
+      <td style="text-align:center"><b>Hora incio</b></td>
+      <td style="text-align:center"><b>Hora fin</b></td>
       <td style="text-align:center"><b>Acciones</b></td>
     </tr>
   </thead>
@@ -43,12 +43,12 @@
     @foreach ($horarios as $horario)
 <tr>
     <td>{{$contador++}}</td>
-    <td>{{$horario->nombre}}</td>   
-    <td>{{$horario->ubicacion}}</td> 
-    <td>{{$horario->capacidad}}</td> 
-    <td>{{$horario->telefono}}</td>
-    <td>{{$horario->especialidad}}</td>
-    <td>{{$horario->estado}}</td>
+    <td>{{$horario->doctor->nombres ." ".$horario->doctor->apellidos}}</td>   
+    <td>{{$horario->doctor->especialidad}}</td> 
+    <td>{{$horario->consultorio->nombre." Ubicaión: ".$horario->consultorio->ubicacion}}</td> 
+    <td>{{$horario->dia}}</td>
+    <td style="text-align:center">{{$horario->hora_inicio}}</td>
+    <td style="text-align:center">{{$horario->hora_fin}}</td>
 
 
     <!-- 👇 ACCIONES JUSTO DESPUÉS -->
