@@ -24,7 +24,6 @@
                 <form action="{{ url('/admin/horarios') }}" method="POST">
                     @csrf
 
-                    <!-- Doctores y Consultorios -->
                     <div class="row">
 
                         <div class="col-md-6">
@@ -34,7 +33,9 @@
                                 <select name="doctor_id" class="form-control" required>
                                     @foreach($doctores as $doctor)
                                         <option value="{{ $doctor->id }}">
-                                            {{ $doctor->nombres }} {{ $doctor->apellidos }} - {{ $doctor->especialidad }}
+                                            {{ $doctor->nombres }}
+                                            {{ $doctor->apellidos }}
+                                            - {{ $doctor->especialidad }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -49,7 +50,8 @@
                                 <select name="consultorio_id" class="form-control" required>
                                     @foreach($consultorios as $consultorio)
                                         <option value="{{ $consultorio->id }}">
-                                            {{ $consultorio->nombre }} - {{ $consultorio->ubicacion }}
+                                            {{ $consultorio->nombre }}
+                                            - {{ $consultorio->ubicacion }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -61,7 +63,6 @@
 
                     <br>
 
-                    <!-- Día y Horarios -->
                     <div class="row">
 
                         <div class="col-md-4">
@@ -85,15 +86,25 @@
                             <div class="form-group">
                                 <label>Hora Inicio</label> <b>*</b>
 
-                                <input type="time"
-                                       name="hora_inicio"
-                                       value="{{ old('hora_inicio') }}"
-                                       class="form-control"
-                                       required>
+                                <div class="input-group date"
+                                     id="timepicker_inicio"
+                                     data-target-input="nearest">
 
-                                @error('hora_inicio')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
+                                    <input type="text"
+                                           name="hora_inicio"
+                                           class="form-control datetimepicker-input"
+                                           data-target="#timepicker_inicio"
+                                           required>
+
+                                    <div class="input-group-append"
+                                         data-target="#timepicker_inicio"
+                                         data-toggle="datetimepicker">
+                                        <div class="input-group-text">
+                                            <i class="far fa-clock"></i>
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
 
@@ -101,15 +112,25 @@
                             <div class="form-group">
                                 <label>Hora Final</label> <b>*</b>
 
-                                <input type="time"
-                                       name="hora_fin"
-                                       value="{{ old('hora_fin') }}"
-                                       class="form-control"
-                                       required>
+                                <div class="input-group date"
+                                     id="timepicker_fin"
+                                     data-target-input="nearest">
 
-                                @error('hora_fin')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
+                                    <input type="text"
+                                           name="hora_fin"
+                                           class="form-control datetimepicker-input"
+                                           data-target="#timepicker_fin"
+                                           required>
+
+                                    <div class="input-group-append"
+                                         data-target="#timepicker_fin"
+                                         data-toggle="datetimepicker">
+                                        <div class="input-group-text">
+                                            <i class="far fa-clock"></i>
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
 
@@ -118,11 +139,13 @@
                     <br>
 
                     <div class="form-group">
-                        <a href="{{ url('/admin/horarios') }}" class="btn btn-secondary">
+                        <a href="{{ url('/admin/horarios') }}"
+                           class="btn btn-secondary">
                             Cancelar
                         </a>
 
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit"
+                                class="btn btn-primary">
                             Registrar nuevo
                         </button>
                     </div>
@@ -135,5 +158,19 @@
 
     </div>
 </div>
+
+<script>
+$(function () {
+
+    $('#timepicker_inicio').datetimepicker({
+        format: 'HH:mm'
+    });
+
+    $('#timepicker_fin').datetimepicker({
+        format: 'HH:mm'
+    });
+
+});
+</script>
 
 @endsection
