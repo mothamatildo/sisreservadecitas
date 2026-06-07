@@ -126,5 +126,154 @@ $(function () {
     </div>
   </div>
 </div>
+<br>
+
+<div class="col-md-12">
+      <div class="card card-outline card-primary">
+      <dv class="card-header">
+        <h3 class="card-title">Calendario atención de doctores</h3>
+      </dv>
+      <div class="card-body">
+        <table class="table  table-striped table-hover table-sm table-bordered">
+          <thead>
+            <tr style="text-align: center">
+              <th>Hora</th>
+              <th>Lunes</th>
+              <th>Martes</th>
+              <th>Miercoles</th>
+              <th>Jueves</th>
+              <th>Viernes</th>
+              <th>Sabado</th>
+            </tr>
+          </thead>
+
+          <tbody>
+          <tr>
+          <td>8:00 - 9:00</td>
+          <td>Dr Muelitas</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          </tr>
+                    <tr>
+          <td>9:00 - 10:00</td>
+                    <td>Dr Muelitas</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          </tr>
+                    <tr>
+          <td>10:00 - 11:00</td>
+                    <td>Dr Muelitas</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          </tr>
+                    <tr>
+          <td>11:00 - 12:00</td>
+                    <td>Dr Muelitas</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          </tr>
+                    <tr>
+          <td>12:00 - 01:00</td>
+                    <td>Dr Muelitas</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          </tr>
+                    <tr>
+          <td>01:00 - 02:00</td>
+                    <td>Dr Muelitas</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          </tr>
+                    <tr>
+          <td>02:00 - 03:00</td>
+                    <td>Dr Muelitas</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          </tr>
+                    <tr>
+          <td>03:00 - 04:00</td>
+                    <td>Dr Muelitas</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          </tr>
+                    <tr>
+          <td>04:00 - 05:00</td>
+                    <td>Dr Muelitas</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          </tr>
+                    <tr>
+          <td>05:00 - 06:00</td>
+                    <td>Dr Muelitas</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          </tr>
+                    <tr>
+          <td>06:00 - 07:00</td>
+                    <td>Dr Muelitas</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          </tr>
+                    <tr>
+          <td>07:00 - 08:00</td>
+                    <td>Dr Muelitas</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          </tr>
+
+
+          </tbody>
+        </table>
+    
+
+</div>
 
 @endsection
