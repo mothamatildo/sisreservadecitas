@@ -2,6 +2,7 @@
 
 @section('content')
 
+
 <div class="row">
     <div class="col-md-12">
         <h1>Registro de un nuevo horario</h1>
@@ -11,152 +12,214 @@
 <hr>
 
 <div class="row">
-    <div class="col-md-12">
 
-        <div class="card card-outline card-primary">
+<div class="col-md-4">
 
-            <div class="card-header">
-                <h3 class="card-title">Llene los datos</h3>
-            </div>
+    <div class="card card-outline card-primary">
 
-            <div class="card-body">
+        <div class="card-header">
+            <h3 class="card-title">Llene los datos</h3>
+        </div>
 
-                <form action="{{ url('/admin/horarios') }}" method="POST">
-                    @csrf
+        <div class="card-body">
 
-                    <div class="row">
+            <form action="{{ url('/admin/horarios') }}" method="POST">
+                @csrf
 
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Doctores</label> <b>*</b>
+                <div class="form-group">
+                    <label>Doctores *</label>
 
-                                <select name="doctor_id" class="form-control" required>
-                                    @foreach($doctores as $doctor)
-                                        <option value="{{ $doctor->id }}">
-                                            {{ $doctor->nombres }}
-                                            {{ $doctor->apellidos }}
-                                            - {{ $doctor->especialidad }}
-                                        </option>
-                                    @endforeach
-                                </select>
+                    <select name="doctor_id" class="form-control" required>
+                        @foreach($doctores as $doctor)
+                            <option value="{{ $doctor->id }}">
+                                {{ $doctor->nombres }}
+                                {{ $doctor->apellidos }}
+                                - {{ $doctor->especialidad }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
 
-                            </div>
-                        </div>
+                <div class="form-group">
+                    <label>Consultorios *</label>
 
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Consultorios</label> <b>*</b>
+                    <select name="consultorio_id" class="form-control" required>
+                        @foreach($consultorios as $consultorio)
+                            <option value="{{ $consultorio->id }}">
+                                {{ $consultorio->nombre }}
+                                - {{ $consultorio->ubicacion }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
 
-                                <select name="consultorio_id" class="form-control" required>
-                                    @foreach($consultorios as $consultorio)
-                                        <option value="{{ $consultorio->id }}">
-                                            {{ $consultorio->nombre }}
-                                            - {{ $consultorio->ubicacion }}
-                                        </option>
-                                    @endforeach
-                                </select>
+                <div class="form-group">
+                    <label>Día *</label>
 
-                            </div>
-                        </div>
+                    <select name="dia" class="form-control" required>
+                        <option value="LUNES">LUNES</option>
+                        <option value="MARTES">MARTES</option>
+                        <option value="MIERCOLES">MIERCOLES</option>
+                        <option value="JUEVES">JUEVES</option>
+                        <option value="VIERNES">VIERNES</option>
+                        <option value="SABADO">SABADO</option>
+                        <option value="DOMINGO">DOMINGO</option>
+                    </select>
+                </div>
 
-                    </div>
+                <div class="form-group">
+                    <label>Hora Inicio *</label>
 
-                    <br>
+                    <div class="input-group date"
+                         id="timepicker_inicio"
+                         data-target-input="nearest">
 
-                    <div class="row">
+                        <input type="text"
+                               name="hora_inicio"
+                               class="form-control datetimepicker-input"
+                               data-target="#timepicker_inicio"
+                               required>
 
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>Día</label> <b>*</b>
-
-                                <select name="dia" class="form-control" required>
-                                    <option value="LUNES">LUNES</option>
-                                    <option value="MARTES">MARTES</option>
-                                    <option value="MIERCOLES">MIERCOLES</option>
-                                    <option value="JUEVES">JUEVES</option>
-                                    <option value="VIERNES">VIERNES</option>
-                                    <option value="SABADO">SABADO</option>
-                                    <option value="DOMINGO">DOMINGO</option>
-                                </select>
-
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>Hora Inicio</label> <b>*</b>
-
-                                <div class="input-group date"
-                                     id="timepicker_inicio"
-                                     data-target-input="nearest">
-
-                                    <input type="text"
-                                           name="hora_inicio"
-                                           class="form-control datetimepicker-input"
-                                           data-target="#timepicker_inicio"
-                                           required>
-
-                                    <div class="input-group-append"
-                                         data-target="#timepicker_inicio"
-                                         data-toggle="datetimepicker">
-                                        <div class="input-group-text">
-                                            <i class="far fa-clock"></i>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>Hora Final</label> <b>*</b>
-
-                                <div class="input-group date"
-                                     id="timepicker_fin"
-                                     data-target-input="nearest">
-
-                                    <input type="text"
-                                           name="hora_fin"
-                                           class="form-control datetimepicker-input"
-                                           data-target="#timepicker_fin"
-                                           required>
-
-                                    <div class="input-group-append"
-                                         data-target="#timepicker_fin"
-                                         data-toggle="datetimepicker">
-                                        <div class="input-group-text">
-                                            <i class="far fa-clock"></i>
-                                        </div>
-                                    </div>
-
-                                </div>
+                        <div class="input-group-append"
+                             data-target="#timepicker_inicio"
+                             data-toggle="datetimepicker">
+                            <div class="input-group-text">
+                                <i class="far fa-clock"></i>
                             </div>
                         </div>
 
                     </div>
+                </div>
 
-                    <br>
+                <div class="form-group">
+                    <label>Hora Final *</label>
 
-                    <div class="form-group">
-                        <a href="{{ url('/admin/horarios') }}"
-                           class="btn btn-secondary">
-                            Cancelar
-                        </a>
+                    <div class="input-group date"
+                         id="timepicker_fin"
+                         data-target-input="nearest">
 
-                        <button type="submit"
-                                class="btn btn-primary">
-                            Registrar nuevo
-                        </button>
+                        <input type="text"
+                               name="hora_fin"
+                               class="form-control datetimepicker-input"
+                               data-target="#timepicker_fin"
+                               required>
+
+                        <div class="input-group-append"
+                             data-target="#timepicker_fin"
+                             data-toggle="datetimepicker">
+                            <div class="input-group-text">
+                                <i class="far fa-clock"></i>
+                            </div>
+                        </div>
+
                     </div>
+                </div>
 
-                </form>
+                <br>
 
-            </div>
+                <a href="{{ url('/admin/horarios') }}"
+                   class="btn btn-secondary">
+                    Cancelar
+                </a>
+
+                <button type="submit"
+                        class="btn btn-primary">
+                    Registrar nuevo
+                </button>
+
+            </form>
 
         </div>
 
     </div>
+
+</div>
+
+<div class="col-md-8">
+
+ <table class="table table-bordered table-sm table-horarios">
+
+        <thead>
+        <tr>
+            <th>Hora</th>
+            <th>Lunes</th>
+            <th>Martes</th>
+            <th>Miércoles</th>
+            <th>Jueves</th>
+            <th>Viernes</th>
+            <th>Sábado</th>
+            <th>Domingo</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+        @php
+            $dias = [
+                'LUNES',
+                'MARTES',
+                'MIERCOLES',
+                'JUEVES',
+                'VIERNES',
+                'SABADO',
+                'DOMINGO'
+            ];
+        @endphp
+
+        @foreach($horas as $hora)
+
+        <tr>
+
+            <td>
+                {{ substr($hora['inicio'],0,5) }}
+                -
+                {{ substr($hora['fin'],0,5) }}
+            </td>
+
+            @foreach($dias as $dia)
+
+<td>
+
+@php
+    $encontrado = false;
+@endphp
+
+@foreach($horarios as $horario)
+
+    @if(
+        trim($horario->dia) == trim($dia) &&
+        $horario->hora_inicio <= $hora['inicio'] &&
+        $horario->hora_fin >= $hora['fin']
+    )
+
+{{ $horario->doctor->nombres.' '.$horario->doctor->apellidos }}
+
+        @php
+            $encontrado = true;
+        @endphp
+
+    @endif
+
+@endforeach
+
+@if(!$encontrado)
+    -
+@endif
+
+</td>
+
+            @endforeach
+
+        </tr>
+
+        @endforeach
+
+        </tbody>
+
+    </table>
+
+</div>
+
 </div>
 
 <script>

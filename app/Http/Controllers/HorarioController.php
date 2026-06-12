@@ -15,13 +15,32 @@ class HorarioController extends Controller
         return view('admin.horarios.index', compact('horarios'));
     }
 
-    public function create()
-    {
-        $doctores = Doctor::all();
-        $consultorios = Consultorio::all();
+public function create()
+{
+    $doctores = Doctor::all();
+    $consultorios = Consultorio::all();
+    $horarios = Horario::with('doctor','consultorio')->get();
 
-        return view('admin.horarios.create', compact('doctores', 'consultorios'));
-    }
+    $horas = [];
+
+for ($i = 8; $i < 20; $i++) {
+
+    $inicio = str_pad($i, 2, '0', STR_PAD_LEFT).':00';
+    $fin = str_pad($i + 1, 2, '0', STR_PAD_LEFT).':00';
+
+    $horas[] = [
+        'inicio' => $inicio,
+        'fin' => $fin
+    ];
+}
+
+    return view('admin.horarios.create', compact(
+        'doctores',
+        'consultorios',
+        'horarios',
+        'horas'
+    ));
+}
 
     public function store(Request $request)
 {
