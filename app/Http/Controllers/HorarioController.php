@@ -11,8 +11,9 @@ class HorarioController extends Controller
 {
     public function index()
     {
+          $consultorios = Consultorio::all();
         $horarios = Horario::with('doctor', 'consultorio')->get();
-        return view('admin.horarios.index', compact('horarios'));
+        return view('admin.horarios.index', compact('horarios', 'consultorios'));
     }
 
 public function create()
@@ -40,6 +41,10 @@ for ($i = 8; $i < 20; $i++) {
         'horarios',
         'horas'
     ));
+}
+
+public function cargar_datos_consultorios($id){
+ echo "respuesta desde el controlador ".$id;   
 }
 
     public function store(Request $request)

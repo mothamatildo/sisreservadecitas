@@ -244,3 +244,8 @@ Route::get('/admin/horarios/{id}/confirm-delete', [HorarioController::class, 'co
 Route::delete('/admin/horarios/{id}', [HorarioController::class, 'destroy'])
     ->name('admin.horarios.destroy')
     ->middleware('auth');    
+
+///ajax
+Route::get('/admin/horarios/consultorios/{id}', [HorarioController::class, 'cargar_datos_consultorios'])
+->name('admin.horarios.cargar_datos_consultorios')
+->middleware('auth');

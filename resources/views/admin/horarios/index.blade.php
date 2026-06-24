@@ -51,7 +51,7 @@
     <td style="text-align:center">{{$horario->hora_fin}}</td>
 
 
-    <!-- 👇 ACCIONES JUSTO DESPUÉS -->
+   
     <td style="text-align: center">
         <div class="btn-group">
 
@@ -132,8 +132,51 @@ $(function () {
       <div class="card card-outline card-primary">
       <dv class="card-header">
         <h3 class="card-title">Calendario atención de doctores</h3>
+
       </dv>
       <div class="card-body">
+        <div class="row">
+                  
+                <div class="form-group">
+                    <label>Consultorios</label>
+                    <select name="consultorio_id" id="consultorio_select" class="form-control" required>
+                        @foreach($consultorios as $consultorio)
+                            <option value="{{ $consultorio->id }}">
+                                {{ $consultorio->nombre }}
+                                - {{ $consultorio->ubicacion }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+        </div>
+
+        <script>
+          $('#consultorio_select').on('change', function() {
+          var consultorio_id = $('#consultorio_select').val();
+          var url = "{{route('admin.horarios.cargar_datos_consultorios',':id')}}";
+          url = url.replace(':id',consultorio_id);
+
+          if(consultorio_id){
+            $.ajax({
+              url: url,
+              type: 'GET',
+              success:function (data) {
+                $('#consultorio_info').html (data);
+              },
+             error: function (){
+              alert ('Error al obtener los datos del consultorio');
+             }              
+            });
+          }else{
+            $('#consultorio_info').html ('');
+          } 
+          });
+        </script>
+        <div id="consultorio_info">
+
+        </div>
+        <hr>
+
         <table style= "text-align: center" class="table  table-striped table-hover table-sm table-bordered">
           <thead>
             <tr style="text-align: center">
