@@ -26,6 +26,43 @@
             <form action="{{ url('/admin/horarios') }}" method="POST">
                 @csrf
 
+                               <div class="form-group">
+                    <label>Consultorios *</label>
+
+                    <select name="consultorio_id" id="consultorio_select" class="form-control" required>
+                        <option value="">Seleccionar consultorio</option>
+                        @foreach($consultorios as $consultorio)
+                            <option value="{{ $consultorio->id }}">
+                                {{ $consultorio->nombre }}
+                                - {{ $consultorio->ubicacion }}
+                            </option>
+                        @endforeach
+                    </select>
+
+                            <script>
+          $('#consultorio_select').on('change', function() {
+          var consultorio_id = $('#consultorio_select').val();
+          var url = "{{route('admin.horarios.cargar_datos_consultorios',':id')}}";
+          url = url.replace(':id',consultorio_id);
+
+          if(consultorio_id){
+            $.ajax({
+              url: url,
+              type: 'GET',
+              success:function (data) {
+                $('#consultorio_info').html (data);
+              },
+             error: function (){
+              alert ('Error al obtener los datos del consultorio');
+             }              
+            });
+          }else{
+            $('#consultorio_info').html ('');
+          } 
+          });
+        </script>
+                </div>
+
                 <div class="form-group">
                     <label>Doctores *</label>
 
@@ -40,18 +77,7 @@
                     </select>
                 </div>
 
-                <div class="form-group">
-                    <label>Consultorios *</label>
-
-                    <select name="consultorio_id" class="form-control" required>
-                        @foreach($consultorios as $consultorio)
-                            <option value="{{ $consultorio->id }}">
-                                {{ $consultorio->nombre }}
-                                - {{ $consultorio->ubicacion }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
+ 
 
                 <div class="form-group">
                     <label>Día *</label>
@@ -135,90 +161,59 @@
 
 </div>
 
+<style>
+.table-horarios{
+    font-size:12px;
+    table-layout:fixed;
+    width:100%;
+}
+
+.table-horarios th{
+    text-align:center;
+    vertical-align:middle;
+    background-color:#f4f6f9;
+    font-weight:bold;
+}
+
+.table-horarios td{
+    text-align:center;
+    vertical-align:middle;
+    height:45px;
+    overflow:hidden;
+    word-wrap:break-word;
+}
+
+.table-horarios th:first-child,
+.table-horarios td:first-child{
+    width:100px;
+}
+
+.table-responsive{
+    overflow-x:auto;
+}
+</style>
+
 <div class="col-md-8">
 
- <table class="table table-bordered table-sm table-horarios">
+    <div class="card card-outline card-primary">
 
-        <thead>
-        <tr>
-            <th>Hora</th>
-            <th>Lunes</th>
-            <th>Martes</th>
-            <th>Miércoles</th>
-            <th>Jueves</th>
-            <th>Viernes</th>
-            <th>Sábado</th>
-            <th>Domingo</th>
-        </tr>
-        </thead>
+        <div class="card-header">
+            <h3 class="card-title">Horarios registrados</h3>
+        </div>
 
-        <tbody>
+        <div class="card-body">
 
-        @php
-            $dias = [
-                'LUNES',
-                'MARTES',
-                'MIERCOLES',
-                'JUEVES',
-                'VIERNES',
-                'SABADO',
-                'DOMINGO'
-            ];
-        @endphp
+            <div class="table-responsive">
 
-        @foreach($horas as $hora)
+        <div id="consultorio_info">
 
-        <tr>
+        </div>
 
-            <td>
-                {{ substr($hora['inicio'],0,5) }}
-                -
-                {{ substr($hora['fin'],0,5) }}
-            </td>
+            </div>
 
-            @foreach($dias as $dia)
+        </div>
 
-<td>
-
-@php
-    $encontrado = false;
-@endphp
-
-@foreach($horarios as $horario)
-
-    @if(
-        trim($horario->dia) == trim($dia) &&
-        $horario->hora_inicio <= $hora['inicio'] &&
-        $horario->hora_fin >= $hora['fin']
-    )
-
-{{ $horario->doctor->nombres.' '.$horario->doctor->apellidos }}
-
-        @php
-            $encontrado = true;
-        @endphp
-
-    @endif
-
-@endforeach
-
-@if(!$encontrado)
-    -
-@endif
-
-</td>
-
-            @endforeach
-
-        </tr>
-
-        @endforeach
-
-        </tbody>
-
-    </table>
-
-</div>
+    </div>
 
 </div>
 
