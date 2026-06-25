@@ -44,7 +44,14 @@ for ($i = 8; $i < 20; $i++) {
 }
 
 public function cargar_datos_consultorios($id){
- echo "respuesta desde el controlador ".$id;   
+    try{
+        $horarios = Horario::with('doctor','consultorio')->where ('consultorio_id',$id)->get();
+       // print_r($horarios);
+       return view('admin.horarios.cargar_datos_consultorios',compact('horarios'));
+    }catch (\Exception $exception){
+        return response()->json(['mensaje' => 'Error']);
+    }
+
 }
 
     public function store(Request $request)
