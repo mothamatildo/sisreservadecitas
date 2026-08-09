@@ -56,44 +56,40 @@ public function cargar_datos_consultorios($id){
 
     public function store(Request $request)
 {
-   // Validar los datos del formulario
-$request->validate([
-    'dia' => 'required',
-    'hora_inicio' => 'required|date_format:H:i',
-    'hora_fin' => 'required|date_format:H:i|after:hora_inicio',
-    'consultorio_id' => 'required|exists:consultorios,id', // Validar que el consultorio exista
-]);
+    // Validación de los datos recibidos
+    $request->validate([
+        'doctor_id' => 'required|exists:doctors,id',
+        'consultorio_id' => 'required|exists:consultorios,id',
+        'dia' => 'required',
+        'hora_inicio' => 'required|date_format:H:i',
+        'hora_fin' => 'required|date_format:H:i|after:hora_inicio',
+    ]);
 
-// Verificar si el horario ya existe para ese día, rango de horas y consultorio
-$horarioExistente = Horario::where('dia', $request->dia)
-    ->where('consultorio_id', $request->consultorio_id) // Filtrar por consultorio
-    ->where(function ($query) use ($request) {
+    // Verificar si existe un horario que se cruce
+    // con el doctor o con el consultorio seleccionado
+    $horarioExistente = Horario::where('dia', $request->dia)
+        ->where(function ($query) use ($request) {
 
-        $query->where(function ($query) use ($request) {
-            $query->where('hora_inicio', '>=', $request->hora_inicio)
-                  ->where('hora_inicio', '<', $request->hora_fin);
+            $query->where('doctor_id', $request->doctor_id)
+                  ->orWhere('consultorio_id', $request->consultorio_id);
+
         })
+        ->where('hora_inicio', '<', $request->hora_fin)
+        ->where('hora_fin', '>', $request->hora_inicio)
+        ->exists();
 
-        ->orWhere(function ($query) use ($request) {
-            $query->where('hora_fin', '>', $request->hora_inicio)
-                  ->where('hora_fin', '<=', $request->hora_fin);
-        })
+    // Si existe un conflicto, regresar al formulario
+    if ($horarioExistente) {
+        return redirect()->back()
+            ->withInput()
+            ->with(
+                'mensaje',
+                'No se puede registrar el horario porque existe un conflicto con el doctor o el consultorio seleccionado.'
+            )
+            ->with('icono', 'error');
+    }
 
-        ->orWhere(function ($query) use ($request) {
-            $query->where('hora_inicio', '<', $request->hora_inicio)
-                  ->where('hora_fin', '>', $request->hora_fin);
-        });
-
-    })
-    ->exists();
-
-if ($horarioExistente) {
-    return redirect()->back()
-        ->withInput()
-        ->with('mensaje', 'Ya existe un horario que se superpone con el horario ingresado para este consultorio')
-        ->with('icono', 'error');
-}
-
+    // Crear el nuevo horario
     Horario::create([
         'doctor_id' => $request->doctor_id,
         'consultorio_id' => $request->consultorio_id,
