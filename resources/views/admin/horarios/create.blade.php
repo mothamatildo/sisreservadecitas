@@ -39,28 +39,56 @@
                         @endforeach
                     </select>
 
-                            <script>
-          $('#consultorio_select').on('change', function() {
-          var consultorio_id = $('#consultorio_select').val();
-          var url = "{{route('admin.horarios.cargar_datos_consultorios',':id')}}";
-          url = url.replace(':id',consultorio_id);
+<script>
+document.addEventListener('DOMContentLoaded', function () {
 
-          if(consultorio_id){
-            $.ajax({
-              url: url,
-              type: 'GET',
-              success:function (data) {
-                $('#consultorio_info').html (data);
-              },
-             error: function (){
-              alert ('Error al obtener los datos del consultorio');
-             }              
+    const consultorioSelect = document.getElementById('consultorio_select');
+    const consultorioInfo = document.getElementById('consultorio_info');
+
+    consultorioSelect.addEventListener('change', function () {
+
+        const consultorioId = this.value;
+
+        if (!consultorioId) {
+            consultorioInfo.innerHTML = '';
+            return;
+        }
+
+        let url = "{{ route('admin.horarios.cargar_datos_consultorios', ':id') }}";
+        url = url.replace(':id', consultorioId);
+
+        consultorioInfo.innerHTML = `
+            <div class="text-center p-3">
+                <i class="fas fa-spinner fa-spin"></i>
+                Cargando horarios...
+            </div>
+        `;
+
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error en la respuesta del servidor');
+                }
+
+                return response.text();
+            })
+            .then(data => {
+                consultorioInfo.innerHTML = data;
+            })
+            .catch(error => {
+                console.error(error);
+
+                consultorioInfo.innerHTML = `
+                    <div class="alert alert-danger">
+                        Error al cargar los horarios del consultorio.
+                    </div>
+                `;
             });
-          }else{
-            $('#consultorio_info').html ('');
-          } 
-          });
-        </script>
+
+    });
+
+});
+</script>
                 </div>
 
                 <div class="form-group">
@@ -200,19 +228,20 @@
         <div class="card-header">
             <h3 class="card-title">Horarios registrados</h3>
         </div>
+<div class="card-body">
 
-        <div class="card-body">
-
-            <div class="table-responsive">
-
-        <div id="consultorio_info">
-
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <strong>Por favor, corrige los siguientes errores:</strong>
+            <ul class="mb-0">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
         </div>
+    @endif
 
-            </div>
-
-        </div>
-
+    <form action="{{ url('/admin/horarios') }}" method="POST">
     </div>
 
 </div>
