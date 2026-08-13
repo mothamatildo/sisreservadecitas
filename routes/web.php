@@ -7,6 +7,7 @@ use App\Http\Controllers\SecretariaController;
 use App\Http\Controllers\ConsultorioController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\HorarioController;
+use App\Http\Controllers\ReservaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -249,3 +250,35 @@ Route::delete('/admin/horarios/{id}', [HorarioController::class, 'destroy'])
 Route::get('/admin/horarios/consultorios/{id}', [HorarioController::class, 'cargar_datos_consultorios'])
 ->name('admin.horarios.cargar_datos_consultorios')
 ->middleware('auth');
+
+
+
+// RUTAS PARA EL ADMIN - RESERVAS //
+
+Route::get('/admin/reservas', [ReservaController::class, 'index'])
+    ->name('admin.reservas.index')
+    ->middleware('auth');
+
+Route::get('/admin/reservas/create', [ReservaController::class, 'create'])
+    ->name('admin.reservas.create')
+    ->middleware('auth');
+
+Route::post('/admin/reservas', [ReservaController::class, 'store'])
+    ->name('admin.reservas.store')
+    ->middleware('auth');
+
+Route::get('/admin/reservas/{id}', [ReservaController::class, 'show'])
+    ->name('admin.reservas.show')
+    ->middleware('auth');
+
+Route::get('/admin/reservas/{id}/edit', [ReservaController::class, 'edit'])
+    ->name('admin.reservas.edit')
+    ->middleware('auth');
+
+Route::put('/admin/reservas/{id}', [ReservaController::class, 'update'])
+    ->name('admin.reservas.update')
+    ->middleware('auth');
+
+Route::delete('/admin/reservas/{id}', [ReservaController::class, 'destroy'])
+    ->name('admin.reservas.destroy')
+    ->middleware('auth');
