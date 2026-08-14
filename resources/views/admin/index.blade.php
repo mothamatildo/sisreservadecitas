@@ -96,6 +96,43 @@
             </div>
           </div>
 
+          <div class="col-lg-3 col-6">
+    <!-- small box -->
+    <div class="small-box bg-warning">
+        <div class="inner">
+            <h3>{{$total_reservas}}</h3>
+            <p>Reservas</p>
+        </div>
+
+        <div class="icon">
+            <i class="ion fas fa-calendar-check"></i>
+        </div>
+
+        <a href="{{ url('admin/reservas')}}" class="small-box-footer">
+            Más información <i class="fas fa-arrow-circle-right"></i>
+        </a>
+    </div>
+</div>
+
+
+<div class="col-lg-3 col-6">
+    <!-- small box -->
+    <div class="small-box bg-dark">
+        <div class="inner">
+            <h3>{{$total_historiales}}</h3>
+            <p>Historial clínico</p>
+        </div>
+
+        <div class="icon">
+            <i class="ion fas fa-file-medical"></i>
+        </div>
+
+        <a href="{{ url('admin/historiales')}}" class="small-box-footer">
+            Más información <i class="fas fa-arrow-circle-right"></i>
+        </a>
+    </div>
+</div>
+
 
 </div>
     
