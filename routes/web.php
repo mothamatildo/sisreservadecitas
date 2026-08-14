@@ -8,6 +8,7 @@ use App\Http\Controllers\ConsultorioController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\HorarioController;
 use App\Http\Controllers\ReservaController;
+use App\Http\Controllers\HistorialClinicoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -282,3 +283,34 @@ Route::put('/admin/reservas/{id}', [ReservaController::class, 'update'])
 Route::delete('/admin/reservas/{id}', [ReservaController::class, 'destroy'])
     ->name('admin.reservas.destroy')
     ->middleware('auth');
+
+
+// RUTAS PARA EL ADMIN - HISTORIAL CLÍNICO
+
+Route::get('/admin/historiales', [HistorialClinicoController::class, 'index'])
+    ->name('admin.historiales.index')
+    ->middleware('auth');
+
+Route::get('/admin/historiales/create', [HistorialClinicoController::class, 'create'])
+    ->name('admin.historiales.create')
+    ->middleware('auth');
+
+Route::post('/admin/historiales', [HistorialClinicoController::class, 'store'])
+    ->name('admin.historiales.store')
+    ->middleware('auth');
+
+Route::get('/admin/historiales/{id}', [HistorialClinicoController::class, 'show'])
+    ->name('admin.historiales.show')
+    ->middleware('auth');
+
+Route::get('/admin/historiales/{id}/edit', [HistorialClinicoController::class, 'edit'])
+    ->name('admin.historiales.edit')
+    ->middleware('auth');
+
+Route::put('/admin/historiales/{id}', [HistorialClinicoController::class, 'update'])
+    ->name('admin.historiales.update')
+    ->middleware('auth');
+
+Route::delete('/admin/historiales/{id}', [HistorialClinicoController::class, 'destroy'])
+    ->name('admin.historiales.destroy')
+    ->middleware('auth');    
