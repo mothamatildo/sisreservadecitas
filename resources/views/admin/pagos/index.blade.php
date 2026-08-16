@@ -3,183 +3,214 @@
 @section('content')
 
 <div class="row">
-    <h1>Panel principal</h1>
+    <h1>Listado de pagos</h1>
 </div>
 
 <hr>
 
 <div class="row">
+    <div class="col-md-12">
+        <div class="card card-outline card-primary">
 
-    {{-- USUARIOS --}}
-    <div class="col-lg-3 col-6">
-        <div class="small-box bg-info">
-            <div class="inner">
-                <h3>{{ $total_usuarios }}</h3>
-                <p>Usuarios</p>
+            <div class="card-header">
+                <h3 class="card-title">Pagos registrados</h3>
+
+                <div class="card-tools">
+                    <a href="{{ route('admin.pagos.create') }}" class="btn btn-primary">
+                        <i class="bi bi-plus-circle"></i>
+                        Registrar nuevo pago
+                    </a>
+                </div>
             </div>
 
-            <div class="icon">
-                <i class="ion fas bi bi-file-person"></i>
-            </div>
+            <div class="card-body">
 
-            <a href="{{ url('admin/usuarios') }}" class="small-box-footer">
-                Más información <i class="fas fa-arrow-circle-right"></i>
-            </a>
+                @if(session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                <table id="example1"
+                       class="table table-striped table-bordered table-hover table-sm">
+
+                    <thead style="background-color:cornflowerblue">
+                        <tr>
+                            <th>Nro</th>
+                            <th>Paciente</th>
+                            <th>Doctor</th>
+                            <th>Consultorio</th>
+                            <th class="text-center">Valor</th>
+                            <th class="text-center">Método de pago</th>
+                            <th class="text-center">Fecha</th>
+                            <th class="text-center">Estado</th>
+                            <th class="text-center">Acciones</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @php
+                            $contador = 1;
+                        @endphp
+
+                        @foreach($pagos as $pago)
+
+                        <tr>
+
+                            <td>{{ $contador++ }}</td>
+
+                            <td>
+                                {{ $pago->reserva->paciente->nombres }}
+                                {{ $pago->reserva->paciente->apellidos }}
+                            </td>
+
+                            <td>
+                                {{ $pago->reserva->doctor->nombres }}
+                                {{ $pago->reserva->doctor->apellidos }}
+                            </td>
+
+                            <td>
+                                {{ $pago->reserva->consultorio->nombre }}
+                            </td>
+
+                            <td class="text-center">
+                                ${{ number_format($pago->valor, 0, ',', '.') }}
+                            </td>
+
+                            <td class="text-center">
+                                {{ $pago->metodo_pago }}
+                            </td>
+
+                            <td class="text-center">
+                                {{ $pago->fecha_pago }}
+                            </td>
+
+                            <td class="text-center">
+
+                                @if($pago->estado == 'Pagado')
+
+                                    <span class="badge badge-success">
+                                        {{ $pago->estado }}
+                                    </span>
+
+                                @elseif($pago->estado == 'Pendiente')
+
+                                    <span class="badge badge-warning">
+                                        {{ $pago->estado }}
+                                    </span>
+
+                                @else
+
+                                    <span class="badge badge-danger">
+                                        {{ $pago->estado }}
+                                    </span>
+
+                                @endif
+
+                            </td>
+
+                            <td class="text-center">
+
+                                <div class="btn-group">
+
+                                    <a href="{{ route('admin.pagos.show', $pago->id) }}"
+                                       class="btn btn-info btn-sm"
+                                       title="Ver pago">
+                                        <i class="bi bi-eye"></i>
+                                    </a>
+
+                                    <a href="{{ route('admin.pagos.edit', $pago->id) }}"
+                                       class="btn btn-success btn-sm"
+                                       title="Editar pago">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+
+                                    <form action="{{ route('admin.pagos.destroy', $pago->id) }}"
+                                          method="POST"
+                                          style="display:inline">
+
+                                        @csrf
+                                        @method('DELETE')
+
+                                        <button type="submit"
+                                                class="btn btn-danger btn-sm"
+                                                title="Eliminar pago"
+                                                onclick="return confirm('¿Está seguro de eliminar este pago?')">
+
+                                            <i class="bi bi-trash"></i>
+
+                                        </button>
+
+                                    </form>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                        @endforeach
+
+                    </tbody>
+
+                </table>
+
+            </div>
         </div>
     </div>
-
-
-    {{-- SECRETARIAS --}}
-    <div class="col-lg-3 col-6">
-        <div class="small-box bg-primary">
-            <div class="inner">
-                <h3>{{ $total_secretarias }}</h3>
-                <p>Secretarias</p>
-            </div>
-
-            <div class="icon">
-                <i class="ion fas bi bi-person-circle"></i>
-            </div>
-
-            <a href="{{ url('admin/secretarias') }}" class="small-box-footer">
-                Más información <i class="fas fa-arrow-circle-right"></i>
-            </a>
-        </div>
-    </div>
-
-
-    {{-- PACIENTES --}}
-    <div class="col-lg-3 col-6">
-        <div class="small-box bg-success">
-            <div class="inner">
-                <h3>{{ $total_pacientes }}</h3>
-                <p>Pacientes</p>
-            </div>
-
-            <div class="icon">
-                <i class="ion fas bi bi-person-check-fill"></i>
-            </div>
-
-            <a href="{{ url('admin/pacientes') }}" class="small-box-footer">
-                Más información <i class="fas fa-arrow-circle-right"></i>
-            </a>
-        </div>
-    </div>
-
-
-    {{-- CONSULTORIOS --}}
-    <div class="col-lg-3 col-6">
-        <div class="small-box bg-info">
-            <div class="inner">
-                <h3>{{ $total_consultorios }}</h3>
-                <p>Consultorios</p>
-            </div>
-
-            <div class="icon">
-                <i class="ion fas bi bi-building-add"></i>
-            </div>
-
-            <a href="{{ url('admin/consultorios') }}" class="small-box-footer">
-                Más información <i class="fas fa-arrow-circle-right"></i>
-            </a>
-        </div>
-    </div>
-
-
-    {{-- DOCTORES --}}
-    <div class="col-lg-3 col-6">
-        <div class="small-box bg-danger">
-            <div class="inner">
-                <h3>{{ $total_doctores }}</h3>
-                <p>Doctores</p>
-            </div>
-
-            <div class="icon">
-                <i class="ion fas bi bi-person-lines-fill"></i>
-            </div>
-
-            <a href="{{ url('admin/doctores') }}" class="small-box-footer">
-                Más información <i class="fas fa-arrow-circle-right"></i>
-            </a>
-        </div>
-    </div>
-
-
-    {{-- HORARIOS --}}
-    <div class="col-lg-3 col-6">
-        <div class="small-box bg-secondary">
-            <div class="inner">
-                <h3>{{ $total_horarios }}</h3>
-                <p>Horarios</p>
-            </div>
-
-            <div class="icon">
-                <i class="ion fas bi bi-calendar-week"></i>
-            </div>
-
-            <a href="{{ url('admin/horarios') }}" class="small-box-footer">
-                Más información <i class="fas fa-arrow-circle-right"></i>
-            </a>
-        </div>
-    </div>
-
-
-    {{-- RESERVAS --}}
-    <div class="col-lg-3 col-6">
-        <div class="small-box bg-warning">
-            <div class="inner">
-                <h3>{{ $total_reservas }}</h3>
-                <p>Reservas</p>
-            </div>
-
-            <div class="icon">
-                <i class="ion fas bi bi-calendar-check"></i>
-            </div>
-
-            <a href="{{ url('admin/reservas') }}" class="small-box-footer">
-                Más información <i class="fas fa-arrow-circle-right"></i>
-            </a>
-        </div>
-    </div>
-
-
-    {{-- HISTORIAL CLÍNICO --}}
-    <div class="col-lg-3 col-6">
-        <div class="small-box bg-dark">
-            <div class="inner">
-                <h3>{{ $total_historiales }}</h3>
-                <p>Historial clínico</p>
-            </div>
-
-            <div class="icon">
-                <i class="ion fas bi bi-file-medical"></i>
-            </div>
-
-            <a href="{{ url('admin/historiales') }}" class="small-box-footer">
-                Más información <i class="fas fa-arrow-circle-right"></i>
-            </a>
-        </div>
-    </div>
-
-
-    {{-- PAGOS --}}
-    <div class="col-lg-3 col-6">
-        <div class="small-box bg-primary">
-            <div class="inner">
-                <h3>{{ $total_pagos }}</h3>
-                <p>Pagos</p>
-            </div>
-
-            <div class="icon">
-                <i class="ion fas bi bi-cash-coin"></i>
-            </div>
-
-            <a href="{{ url('admin/pagos') }}" class="small-box-footer">
-                Más información <i class="fas fa-arrow-circle-right"></i>
-            </a>
-        </div>
-    </div>
-
 </div>
+
+<script>
+$(function () {
+
+    $("#example1").DataTable({
+
+        "pageLength": 5,
+
+        "language": {
+            "emptyTable": "No hay información",
+            "info": "Mostrando _START_ a _END_ de _TOTAL_ Pagos",
+            "infoEmpty": "Mostrando 0 a 0 de 0 Pagos",
+            "infoFiltered": "(Filtrado de _MAX_ total Pagos)",
+            "lengthMenu": "Mostrar _MENU_ Pagos",
+            "search": "Buscador:",
+            "zeroRecords": "Sin resultados encontrados",
+
+            "paginate": {
+                "first": "Primero",
+                "last": "Último",
+                "next": "Siguiente",
+                "previous": "Anterior"
+            }
+        },
+
+        responsive: false,
+        lengthChange: true,
+        autoWidth: false,
+
+        columnDefs: [
+            {
+                orderable: false,
+                targets: -1
+            }
+        ],
+
+        buttons: [
+            {
+                extend: 'collection',
+                text: 'Reportes',
+                buttons: ['copy', 'pdf', 'csv', 'excel', 'print']
+            },
+            {
+                extend: 'colvis',
+                text: 'Visor de columnas'
+            }
+        ]
+
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+});
+</script>
 
 @endsection
