@@ -11,7 +11,7 @@ use App\Http\Controllers\ReservaController;
 use App\Http\Controllers\HistorialClinicoController;
 use App\Http\Controllers\PagoController;
 use App\Http\Controllers\ConfiguracionController;
-
+use App\Http\Controllers\RolController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -352,3 +352,5 @@ Route::delete('/admin/pagos/{id}', [PagoController::class, 'destroy'])
 
     Route::resource('admin/configuracion', ConfiguracionController::class)
     ->names('admin.configuracion');
+    Route::resource('roles', RolController::class)
+    ->names('admin.roles');
