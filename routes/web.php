@@ -10,6 +10,8 @@ use App\Http\Controllers\HorarioController;
 use App\Http\Controllers\ReservaController;
 use App\Http\Controllers\HistorialClinicoController;
 use App\Http\Controllers\PagoController;
+use App\Http\Controllers\ConfiguracionController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,6 +32,8 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // RUTAS PARA EL ADMIN 
+
+
 
 Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])
 ->name('admin.index')
@@ -344,3 +348,7 @@ Route::put('/admin/pagos/{id}', [PagoController::class, 'update'])
 Route::delete('/admin/pagos/{id}', [PagoController::class, 'destroy'])
     ->name('admin.pagos.destroy')
     ->middleware('auth');
+
+
+    Route::resource('admin/configuracion', ConfiguracionController::class)
+    ->names('admin.configuracion');
