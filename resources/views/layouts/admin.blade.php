@@ -291,6 +291,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </ul>
 </li>
 
+<li class="nav-item">
+    <a href="{{ url('admin/pagos') }}" class="nav-link">
+        <i class="nav-icon bi bi-cash-coin"></i>
+        <p>
+            Pagos
+        </p>
+    </a>
+</li>
+
 
 
 <li class="nav-item">

@@ -11,6 +11,7 @@ use App\Models\Doctor;
 use App\Models\Horario;
 use App\Models\Reserva;
 use App\Models\HistorialClinico;
+use App\Models\Pago;
 
 class AdminController extends Controller
 {
@@ -24,6 +25,7 @@ class AdminController extends Controller
         $total_horarios = Horario::count();
         $total_reservas = Reserva::count();
         $total_historiales = HistorialClinico::count();
+        $total_pagos = Pago::count();
 
         return view('admin.index', compact(
             'total_usuarios',
@@ -33,7 +35,8 @@ class AdminController extends Controller
             'total_doctores',
             'total_horarios',
             'total_reservas',
-            'total_historiales'
+            'total_historiales',
+            'total_pagos'
         ));
     }
 }

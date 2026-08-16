@@ -9,7 +9,7 @@ use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\HorarioController;
 use App\Http\Controllers\ReservaController;
 use App\Http\Controllers\HistorialClinicoController;
-
+use App\Http\Controllers\PagoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -314,3 +314,33 @@ Route::put('/admin/historiales/{id}', [HistorialClinicoController::class, 'updat
 Route::delete('/admin/historiales/{id}', [HistorialClinicoController::class, 'destroy'])
     ->name('admin.historiales.destroy')
     ->middleware('auth');    
+
+// RUTAS PARA EL ADMIN - PAGOS
+
+Route::get('/admin/pagos', [PagoController::class, 'index'])
+    ->name('admin.pagos.index')
+    ->middleware('auth');
+
+Route::get('/admin/pagos/create', [PagoController::class, 'create'])
+    ->name('admin.pagos.create')
+    ->middleware('auth');
+
+Route::post('/admin/pagos', [PagoController::class, 'store'])
+    ->name('admin.pagos.store')
+    ->middleware('auth');
+
+Route::get('/admin/pagos/{id}', [PagoController::class, 'show'])
+    ->name('admin.pagos.show')
+    ->middleware('auth');
+
+Route::get('/admin/pagos/{id}/edit', [PagoController::class, 'edit'])
+    ->name('admin.pagos.edit')
+    ->middleware('auth');
+
+Route::put('/admin/pagos/{id}', [PagoController::class, 'update'])
+    ->name('admin.pagos.update')
+    ->middleware('auth');
+
+Route::delete('/admin/pagos/{id}', [PagoController::class, 'destroy'])
+    ->name('admin.pagos.destroy')
+    ->middleware('auth');
