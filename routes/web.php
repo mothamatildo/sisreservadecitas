@@ -12,6 +12,9 @@ use App\Http\Controllers\HistorialClinicoController;
 use App\Http\Controllers\PagoController;
 use App\Http\Controllers\ConfiguracionController;
 use App\Http\Controllers\RolController;
+use App\Http\Controllers\ReporteController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -354,3 +357,9 @@ Route::delete('/admin/pagos/{id}', [PagoController::class, 'destroy'])
     ->names('admin.configuracion');
     Route::resource('roles', RolController::class)
     ->names('admin.roles');
+
+// RUTAS PARA EL ADMIN - REPORTES
+
+Route::get('/admin/reportes', [ReporteController::class, 'index'])
+    ->name('admin.reportes.index')
+    ->middleware('auth');    
