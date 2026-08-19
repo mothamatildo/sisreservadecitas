@@ -348,6 +348,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </li>
 
 <li class="nav-item">
+    <a href="{{ route('admin.reportes.index') }}" class="nav-link active">
+        <i class="nav-icon fas fa-chart-bar"></i>
+        <p>
+            Reportes
+        </p>
+    </a>
+</li>
+
+<li class="nav-item">
     <a href="#" class="nav-link active">
         <i class="nav-icon fas fa-user-shield"></i>
         <p>
